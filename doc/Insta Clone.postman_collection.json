@@ -1,0 +1,1069 @@
+{
+	"info": {
+		"_postman_id": "9095b4da-2359-47dc-9937-62acc18ad783",
+		"name": "Insta Clone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24551777"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Sign_up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"yash\",\r\n    \"last_name\": \"dobariya\",\r\n    \"email_id\": \"yash@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"dob\": \"2003-02-23\",\r\n    \"country\": \"india\",\r\n    \"bio\": \"I love nature\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sign_up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sign_up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign_in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"token\", jsonData.access_token);\r",
+									"\r",
+									"// Check the status code of the response\r",
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Check the respone has the right elem\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.have.jsonBody(\"access_token\"); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email_id\":\"yash@gmail.com\",\r\n    \"password\":\"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/sign_in",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"sign_in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}/get_all_user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"get_all_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/get_user/68f2ac8e-f505-4702-8729-5e7b4e09f6ec",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"get_user",
+								"68f2ac8e-f505-4702-8729-5e7b4e09f6ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"rohit\",\r\n    \"last_name\": \"dobariya\",\r\n    \"email_id\": \"rohi@gamail.com\",\r\n    \"password\": \"1234\",\r\n    \"dob\": \"23-02-2024\",\r\n    \"bio\": \"i am student\",\r\n    \"country\": \"India\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/update_user/9595d535-c5f1-4aa9-bffc-f3e3895cd3df",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"update_user",
+								"9595d535-c5f1-4aa9-bffc-f3e3895cd3df"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user_delete/6c7a07d6-7ed3-4150-aed5-12c13fefd070",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user_delete",
+								"6c7a07d6-7ed3-4150-aed5-12c13fefd070"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "post_image",
+									"type": "file",
+									"src": "/home/rootz/Downloads/wallpaperflare.com_wallpaper (2).jpg"
+								},
+								{
+									"key": "caption",
+									"value": "cool",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload_image",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload_image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Image",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/347789d1-9328-4cab-8bac-07fd6df5b59d/all_image?page=1&per_page=20",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"347789d1-9328-4cab-8bac-07fd6df5b59d",
+								"all_image"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/get/user_image/c8177253-b26d-4a6f-ac36-a4701fa079a7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"get",
+								"user_image",
+								"c8177253-b26d-4a6f-ac36-a4701fa079a7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/del/user_image/9b257587-8a8f-4451-8af2-b4138b9cac0f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"del",
+								"user_image",
+								"9b257587-8a8f-4451-8af2-b4138b9cac0f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Like",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/like_image/c8177253-b26d-4a6f-ac36-a4701fa079a7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"like_image",
+								"c8177253-b26d-4a6f-ac36-a4701fa079a7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Image Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\" :\"You lokking good\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/comment_image/c8177253-b26d-4a6f-ac36-a4701fa079a7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment_image",
+								"c8177253-b26d-4a6f-ac36-a4701fa079a7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reels",
+			"item": [
+				{
+					"name": "Upload Reel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "post_reel",
+									"type": "file",
+									"src": "/C:/Users/yashd/Downloads/pexels-ameruverse-digital-marketing-media-1494295-1920x1080-24fps.mp4"
+								},
+								{
+									"key": "caption",
+									"value": "Docker video",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload_reel",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload_reel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Reel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/c8177253-b26d-4a6f-ac36-a4701fa079a7/all_reels?page=1&per_page=20",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"c8177253-b26d-4a6f-ac36-a4701fa079a7",
+								"all_reels"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/get/user_reel/aa7fa492-fb12-4a08-81c9-8f34b7d636c0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"get",
+								"user_reel",
+								"aa7fa492-fb12-4a08-81c9-8f34b7d636c0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/del/user_reel/d2ce823d-5cb4-4384-ad74-064fc5a6ecd7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"del",
+								"user_reel",
+								"d2ce823d-5cb4-4384-ad74-064fc5a6ecd7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reels Like",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/like_reel/aa7fa492-fb12-4a08-81c9-8f34b7d636c0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"like_reel",
+								"aa7fa492-fb12-4a08-81c9-8f34b7d636c0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reels Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\":\"nice\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/comment_reel/aa7fa492-fb12-4a08-81c9-8f34b7d636c0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment_reel",
+								"aa7fa492-fb12-4a08-81c9-8f34b7d636c0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Story",
+			"item": [
+				{
+					"name": "Story likes",
+					"item": [
+						{
+							"name": "Story Like",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/like_story/833c1d10-f121-4fb3-b371-d460f1d0a492",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"like_story",
+										"833c1d10-f121-4fb3-b371-d460f1d0a492"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All likes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/user/story_likes/<story_id>",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"story_likes",
+										"<story_id>"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Story Comments",
+					"item": [
+						{
+							"name": "Story Comment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comment\": \"nice work\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/comment_story/52225cbe-4ab5-42e2-a9d9-e43a3272dbd5",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"comment_story",
+										"52225cbe-4ab5-42e2-a9d9-e43a3272dbd5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Upload Story",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "post_story",
+									"type": "file",
+									"src": "/home/rootz/Downloads/nature.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload_story",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload_story"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Story",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"token\", jsonData.access_token);\r",
+									"\r",
+									"// Check the status code of the response\r",
+									"pm.test(\"response is ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Check the respone has the right elem\r",
+									"pm.test(\"response should be okay to process\", function () { \r",
+									"    pm.response.to.have.jsonBody(\"access_token\"); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/user/bab9e7f2-d03f-4b17-a724-e6903d0c7cd3/all_story",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"bab9e7f2-d03f-4b17-a724-e6903d0c7cd3",
+								"all_story"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Story",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/del/user_story/e21730bd-be9c-4137-8f5d-388510b51a86",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"del",
+								"user_story",
+								"e21730bd-be9c-4137-8f5d-388510b51a86"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Message",
+			"item": [
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"send\":\"How are you?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/send/message_user/347789d1-9328-4cab-8bac-07fd6df5b59d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"send",
+								"message_user",
+								"347789d1-9328-4cab-8bac-07fd6df5b59d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "send",
+									"type": "file",
+									"src": "/C:/Users/yashd/Downloads/tractor.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/post/send_user/347789d1-9328-4cab-8bac-07fd6df5b59d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								"send_user",
+								"347789d1-9328-4cab-8bac-07fd6df5b59d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/message_send",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"message_send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Receive Message",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/message_receive",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"message_receive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Message",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/del/user_message/a651b8dd-7fda-4fa6-a393-c1c857edd38c",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"del",
+								"user_message",
+								"a651b8dd-7fda-4fa6-a393-c1c857edd38c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Follow",
+			"item": [
+				{
+					"name": "Follow & Unfollow",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/following_user/3078026a-c92f-416d-8e01-44542d3e6be8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"following_user",
+								"3078026a-c92f-416d-8e01-44542d3e6be8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Following & follower count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/68f2ac8e-f505-4702-8729-5e7b4e09f6ec/following-follower-post-count",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"68f2ac8e-f505-4702-8729-5e7b4e09f6ec",
+								"following-follower-post-count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Following user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/following/68f2ac8e-f505-4702-8729-5e7b4e09f6ec/all_user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"following",
+								"68f2ac8e-f505-4702-8729-5e7b4e09f6ec",
+								"all_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Follower user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/follower/68f2ac8e-f505-4702-8729-5e7b4e09f6ec/all_user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"follower",
+								"68f2ac8e-f505-4702-8729-5e7b4e09f6ec",
+								"all_user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Story Highlight",
+			"item": [
+				{
+					"name": "Hight_light",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "High_lights",
+			"item": [
+				{
+					"name": "Create highlight",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/highlight_story/<story_id>",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"highlight_story",
+								"<story_id>"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
