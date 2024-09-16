@@ -8,4 +8,4 @@ COPY . /app
 
 RUN pip install -r requirements.txt
 
-ENV FLASK_APP=src.app:main_app+ 
+ENV FLASK_APP=src.app:main_app

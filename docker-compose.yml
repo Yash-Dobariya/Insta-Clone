@@ -46,7 +46,7 @@ services:
     environment:
       - SQLALCHEMY_DATABASE_URI=postgresql://postgres:root@db:5433/insta_clone
       - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_BACKEND_URL=redis://redis:6379/0q
+      - CELERY_BACKEND_URL=redis://redis:6379/0
     container_name: celery_worker
     restart: unless-stopped
     networks:
@@ -55,6 +55,22 @@ services:
       - db
       - redis
     command: celery -A src.app.celery_app worker --loglevel=info
+  
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+    - ./templates:/etc/nginx/templates
+    ports:
+    - "8081:80"
+    environment:
+    - NGINX_HOST=foobar.com
+    - NGINX_PORT=80
+    networks:
+      - insta_clone
+    depends_on:
+      - api
+
 
 networks:
   insta_clone:

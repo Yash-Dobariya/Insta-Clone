@@ -30,7 +30,8 @@ parse==1.19.0
 parse-type==0.6.0
 pluggy==1.0.0
 prompt-toolkit==3.0.38
-psycopg2-binary==2.9.6
+# psycopg2-binary==2.9.6
+psycopg2==2.9.5
 pyasn1==0.5.0
 PyJWT==2.6.0
 pytest==7.3.1

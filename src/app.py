@@ -19,7 +19,7 @@ from src.utils.error_handel import InstaCloneException
 from flask_api import status
 from src.config import Config
 from src.story.tasks import init_celery
-from flask_socketio import SocketIO, emit
+# from flask_socketio import SocketIO, emit
 from src.utils.jwt_bearer import token_required
 
 
@@ -28,8 +28,8 @@ def create_app():
 
     app = Flask(__name__)
 
-    socketio = SocketIO(app)
-    socketio.init_app(app)
+    # socketio = SocketIO(app)
+    # socketio.init_app(app)
 
     """get database url"""
     app.config.from_object(Config)
@@ -77,15 +77,15 @@ def create_app():
 
     users = {}
 
-    @socketio.on("status_update")
-    @token_required
-    def handle_status_update(data):
-        user_id = g.user_data.id
-        status = data["status"]
-        users[user_id] = status
+    # @socketio.on("status_update")
+    # @token_required
+    # def handle_status_update(data):
+    #     user_id = g.user_data.id
+    #     status = data["status"]
+    #     users[user_id] = status
 
-        # Emit the "status_updated" event only to the user who sent the event
-        emit("status_updated", {"user_id": user_id, "status": status}, room=request.sid)
+    #     # Emit the "status_updated" event only to the user who sent the event
+    #     emit("status_updated", {"user_id": user_id, "status": status}, room=request.sid)
 
     JWTManager(app)
 
