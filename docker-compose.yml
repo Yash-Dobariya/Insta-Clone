@@ -6,7 +6,7 @@ services:
       - 3000:3000
     command: flask run --host=0.0.0.0 --port=3000 --reload --debugger
     environment:
-      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:root@db:5433/insta_clone
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:root@db:5432/insta_clone
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_BACKEND_URL=redis://redis:6379/0
     container_name: api
@@ -20,7 +20,7 @@ services:
   db:
     image: postgres
     ports:
-      - 5432:5433
+      - 5432:5432
     environment:
       - POSTGRES_DB=insta_clone
       - POSTGRES_USER=postgres
@@ -44,7 +44,7 @@ services:
   celery_worker:
     build: .
     environment:
-      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:root@db:5433/insta_clone
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:root@db:5432/insta_clone
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_BACKEND_URL=redis://redis:6379/0
     container_name: celery_worker
